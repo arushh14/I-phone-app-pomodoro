@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <title>Brief</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Daily & weekly brief from Cowork, with a Pomodoro timer.">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Brief">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <header class="topbar">
+      <h1 class="wordmark">Brief</h1>
+      <nav class="tabs" aria-label="Views">
+        <a href="#/today"    data-tab="today">Today</a>
+        <a href="#/week"     data-tab="week">Week</a>
+        <a href="#/timer"    data-tab="timer">Timer</a>
+        <a href="#/settings" data-tab="settings" aria-label="Settings">Settings</a>
+      </nav>
+    </header>
+
+    <section id="view-today" class="view" hidden>
+      <p class="eyebrow" id="today-eyebrow">Today</p>
+      <h2 class="headline" id="today-date">—</h2>
+      <p class="summary" id="today-summary">Loading…</p>
+      <ul class="event-list" id="today-list"></ul>
+      <p class="status" id="today-status" hidden></p>
+    </section>
+
+    <section id="view-week" class="view" hidden>
+      <p class="eyebrow">This week</p>
+      <h2 class="headline" id="week-range">—</h2>
+      <p class="summary" id="week-summary">Loading…</p>
+      <div id="week-body"></div>
+      <p class="status" id="week-status" hidden></p>
+    </section>
+
+    <section id="view-timer" class="view" hidden>
+      <p class="eyebrow" id="timer-phase">Focus</p>
+      <div class="timer" id="timer-display" aria-live="polite">25:00</div>
+      <p class="timer-meta" id="timer-meta">0 / 4 cycles · 0 today</p>
+      <div class="timer-controls">
+        <button class="btn-primary" id="timer-toggle" type="button">Start</button>
+        <button class="btn-ghost"  id="timer-skip"   type="button">Skip</button>
+        <button class="btn-ghost"  id="timer-reset"  type="button">Reset</button>
+      </div>
+    </section>
+
+    <section id="view-settings" class="view" hidden>
+      <p class="eyebrow">Settings</p>
+      <h2 class="headline">Configure</h2>
+
+      <form id="settings-form" class="form">
+        <label class="field">
+          <span>Cowork iCal URL</span>
+          <input type="url" id="s-ical-url" placeholder="https://cowork.so/ical/…" autocomplete="off" spellcheck="false">
+        </label>
+
+        <label class="field">
+          <span>CORS proxy</span>
+          <input type="url" id="s-proxy" placeholder="https://corsproxy.io/?" autocomplete="off" spellcheck="false">
+          <small>Prefix added before the iCal URL to bypass CORS. Leave default unless you host your own.</small>
+        </label>
+
+        <div class="field-group">
+          <label class="field">
+            <span>Focus (min)</span>
+            <input type="number" id="s-focus" min="1" max="180" step="1">
+          </label>
+          <label class="field">
+            <span>Short break</span>
+            <input type="number" id="s-short" min="1" max="60" step="1">
+          </label>
+          <label class="field">
+            <span>Long break</span>
+            <input type="number" id="s-long" min="1" max="120" step="1">
+          </label>
+          <label class="field">
+            <span>Cycles before long</span>
+            <input type="number" id="s-cycles" min="1" max="12" step="1">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Theme</span>
+          <select id="s-theme">
+            <option value="auto">Auto</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Save</button>
+          <button type="button" class="btn-ghost" id="s-refresh">Refresh now</button>
+        </div>
+        <p class="status" id="settings-status" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="ical.js"></script>
+  <script src="pomodoro.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
