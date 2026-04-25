@@ -4,8 +4,8 @@ A minimal web app for your iPhone home screen: daily & weekly summary from your 
 
 ## Use it
 
-1. Push to `main` — the Pages workflow deploys to `https://<user>.github.io/<repo>/`.
-2. Open the link on your iPhone in Safari → Share → **Add to Home Screen**.
+1. **One-time:** in this repo's **Settings → Pages**, set **Source** to **GitHub Actions**. Then re-run the latest workflow from the **Actions** tab (or push any commit) to trigger the deploy.
+2. Once deployed, open `https://<user>.github.io/<repo>/` on your iPhone in Safari → Share → **Add to Home Screen**.
 3. First launch: tap **Settings**, paste your Cowork iCal URL, save.
 
 ## Cowork feed
